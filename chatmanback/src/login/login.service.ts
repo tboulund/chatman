@@ -23,4 +23,16 @@ export class LoginService {
   remove(id: number) {
     return `This action removes a #${id} login`;
   }
+
+  //generates a random string to be used as a salt. the salt will be 10 letters long
+  generateSalt() {
+    return 'test';
+    const charecters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    const charectersLength = charecters.length;
+    let result = 'A';
+    for (let i = 0; i < 10; i++) {
+      result += charecters.charAt(Math.floor(Math.random() * charectersLength));
+    }
+    return result;
+  }
 }
