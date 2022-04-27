@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateLoginDto } from './dto/create-login.dto';
 import { UpdateLoginDto } from './dto/update-login.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class LoginService {
@@ -34,5 +35,23 @@ export class LoginService {
       result += charecters.charAt(Math.floor(Math.random() * charectersLength));
     }
     return result;
+  }
+
+  //this method hashes a password using a salt, it is used when creating an account and logging in
+  hashPassword(password: string, salt: string) {
+    return bcrypt.hash(password, salt);
+  }
+
+  //this compares 2 passwords. TODO; get the hashed password, and salt from the DB, and use them
+  validatePassword(password: string, username: string) {
+    const saltFromDB = 'This should be taken from the DB using the username';
+    const hashedPasswordFromDB =
+      'This should be taken from the DB using the username';
+    const loginPassword = this.hashPassword(password, saltFromDB);
+    if (loginPassword == hashedPasswordFromDB) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
