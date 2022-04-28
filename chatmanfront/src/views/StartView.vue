@@ -5,8 +5,8 @@
         <img src="../assets/Chatman_Logov2.png" width="600" height="450">
       </div>
       <div class="center_man">
-        <input type="text" value="" placeholder="username"> <br>
-        <input type="password" value="" placeholder="password"> <br>
+        <input type="text" v-model="inputUsername" placeholder="username"> <br>
+        <input type="password" v-model="inputPassword" placeholder="password"> <br>
         <button @click="handleCreateUser">Sign in</button>
       </div>
     </div>
@@ -20,12 +20,11 @@ import { UserStore } from "@/stores/userStore";
 import { ref } from "vue";
 
 const userStore = UserStore();
-const inputName = ref("");
-const inputEmail = ref("");
+const inputUsername = ref("");
 const inputPassword = ref("");
 
 function handleCreateUser() {
-  userStore.createUser(inputName.value, inputEmail.value, inputPassword.value);
+  userStore.loginUser(inputUsername.value,inputPassword.value);
 }
 
 </script>

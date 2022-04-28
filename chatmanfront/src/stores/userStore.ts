@@ -19,8 +19,14 @@ export const UserStore = defineStore({
     createUser(name: string, email: string, password: string) {
       userService
         .createUser(name, email, password)
-        .then((user) => (this.loggedInUser = user))
+        .then((user) => {this.loggedInUser = user})
         .catch((err) => console.log(err));
     },
+    loginUser(username: string, password: string) {
+      userService
+        .loginUser(username,password)
+        .then((user) => {this.loggedInUser = user})
+        .catch((err) => console.log(err))
+    }
   },
 });
