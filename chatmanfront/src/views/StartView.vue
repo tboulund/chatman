@@ -5,9 +5,9 @@
         <img src="../assets/Chatman_Logov2.png" width="600" height="450">
       </div>
       <div class="center_man">
-        <input type="text" v-model="inputUsername" placeholder="username"> <br>
-        <input type="password" v-model="inputPassword" placeholder="password"> <br>
-        <button @click="handleCreateUser">Sign in</button>
+        <InputText v-model="inputUsername" style="margin-bottom: 10px" placeholder="Enter Username" />
+        <InputText type="password" v-model="inputPassword" style="margin-bottom: 10px" placeholder="Enter password" /> <br />
+        <Button @click="handleCreateUser"> Sign in </Button>
       </div>
     </div>
 
