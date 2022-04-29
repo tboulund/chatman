@@ -1,13 +1,15 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { LoginDto } from '../../login/dto/login.dto';
 import * as bcrypt from 'bcrypt';
-import { User } from '../../user.entity';
 import { Model } from 'mongoose';
 import { RegistrationDto } from '../../login/dto/registration.dto';
+import { userEntity } from '../../core/entities/user.entity';
 
 @Injectable()
 export class LoginService {
-  constructor(@Inject('USER_MODEL') private readonly userModel: Model<User>) {}
+  constructor(
+    @Inject('USER_MODEL') private readonly userModel: Model<userEntity>,
+  ) {}
 
   //this method registers a user
   async create(createUserDto: RegistrationDto) {
@@ -41,7 +43,7 @@ export class LoginService {
   }
 
   //this compares 2 passwords, and returns a user if the password was correct
-  async login(loginDTO: LoginDto) {
+  async login(loginDTO: LoginDto): Promise<userEntity> {
     const userFromDb = await this.userModel
       .findOne({
         username: loginDTO.username,
@@ -53,5 +55,13 @@ export class LoginService {
     } else {
       throw new Error('Wrong password');
     }
+  }
+
+  async getUser(loginDTO: LoginDto): Promise<userEntity> {
+    return await this.userModel
+      .findOne({
+        username: loginDTO.username,
+      })
+      .exec();
   }
 }
