@@ -7,7 +7,7 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { LoginService } from './login.service';
+import { LoginService } from '../domain/services/login.service';
 import { LoginDto } from './dto/login.dto';
 
 @Controller('login')

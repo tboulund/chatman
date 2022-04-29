@@ -1,9 +1,13 @@
-import { Injectable } from '@nestjs/common';
-import { LoginDto } from './dto/login.dto';
+import { Inject, Injectable } from '@nestjs/common';
+import { LoginDto } from '../../login/dto/login.dto';
 import * as bcrypt from 'bcrypt';
+import { User } from '../../user.entity';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class LoginService {
+  constructor(@Inject('USER_MODEL') private readonly userModel: Model<User>) {}
+
   create(createLoginDto: LoginDto) {
     return 'This action adds a new login';
   }
