@@ -9,23 +9,19 @@ import {
 } from '@nestjs/common';
 import { LoginService } from '../domain/services/login.service';
 import { LoginDto } from './dto/login.dto';
+import { RegistrationDto } from './dto/registration.dto';
 
 @Controller('login')
 export class LoginController {
   constructor(private readonly loginService: LoginService) {}
 
+  @Post('/register')
+  create(@Body() registerDTO: RegistrationDto) {
+    return this.loginService.create(registerDTO);
+  }
+
   @Post()
-  create(@Body() createLoginDto: LoginDto) {
-    return this.loginService.create(createLoginDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.loginService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.loginService.findOne(+id);
+  login(@Body() loginDTO: LoginDto) {
+    return this.loginService.login(loginDTO);
   }
 }

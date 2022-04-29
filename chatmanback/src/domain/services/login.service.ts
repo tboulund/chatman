@@ -3,31 +3,34 @@ import { LoginDto } from '../../login/dto/login.dto';
 import * as bcrypt from 'bcrypt';
 import { User } from '../../user.entity';
 import { Model } from 'mongoose';
+import { RegistrationDto } from '../../login/dto/registration.dto';
 
 @Injectable()
 export class LoginService {
   constructor(@Inject('USER_MODEL') private readonly userModel: Model<User>) {}
 
-  create(createLoginDto: LoginDto) {
-    return 'This action adds a new login';
-  }
-
-  findAll() {
-    return `This action returns all login`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} login`;
+  //this method registers a user
+  async create(createUserDto: RegistrationDto) {
+    const generatedSalt = this.generateSalt();
+    const hashedPassword = this.hashPassword(
+      createUserDto.password,
+      generatedSalt,
+    );
+    return this.userModel.create({
+      username: createUserDto.username,
+      email: createUserDto.email,
+      hashedPassword: hashedPassword,
+      salt: generatedSalt,
+    });
   }
 
   //generates a random string to be used as a salt. the salt will be 10 letters long
   generateSalt() {
-    return 'test';
-    const charecters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-    const charectersLength = charecters.length;
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    const charactersLength = characters.length;
     let result = 'A';
     for (let i = 0; i < 10; i++) {
-      result += charecters.charAt(Math.floor(Math.random() * charectersLength));
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
   }
@@ -37,16 +40,18 @@ export class LoginService {
     return bcrypt.hash(password, salt);
   }
 
-  //this compares 2 passwords. TODO; get the hashed password, and salt from the DB, and use them
-  validatePassword(password: string, username: string) {
-    const saltFromDB = 'This should be taken from the DB using the username';
-    const hashedPasswordFromDB =
-      'This should be taken from the DB using the username';
-    const loginPassword = this.hashPassword(password, saltFromDB);
-    if (loginPassword == hashedPasswordFromDB) {
-      return true;
+  //this compares 2 passwords, and returns a user if the password was correct
+  async login(loginDTO: LoginDto) {
+    const userFromDb = await this.userModel
+      .findOne({
+        username: loginDTO.username,
+      })
+      .exec();
+    const loginPassword = this.hashPassword(loginDTO.password, userFromDb.salt);
+    if (loginPassword == userFromDb.hashedPassword) {
+      return userFromDb;
     } else {
-      return false;
+      throw new Error('Wrong password');
     }
   }
 }
