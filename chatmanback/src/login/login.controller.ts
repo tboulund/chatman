@@ -16,8 +16,11 @@ export class LoginController {
   constructor(private readonly loginService: LoginService) {}
 
   @Post('/register')
-  create(@Body() registerDTO: RegistrationDto) {
-    return this.loginService.create(registerDTO);
+  async create(@Body() registerDTO: RegistrationDto) {
+    this.loginService.create(registerDTO).then((bruh) => {
+      console.log('controller' + bruh);
+      return bruh;
+    });
   }
 
   @Post()

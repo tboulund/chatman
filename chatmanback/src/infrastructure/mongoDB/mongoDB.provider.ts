@@ -4,6 +4,6 @@ export const MongoDbProvider = {
   provide: 'MONGO_DATABASE_CONNECTION',
   useFactory: (): Promise<typeof mongoose> =>
     mongoose.connect(
-      'mongodb+srv://TestDBUser:CodeWordForTesting@cluster0.hd0tk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+      'mongodb+srv://ExamDbAdmin:FUsojJp2aLCRA3kZ@cluster0.0a3ej.mongodb.net/Database?retryWrites=true&w=majority',
     ),
 };
