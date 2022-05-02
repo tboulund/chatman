@@ -12,18 +12,22 @@ export class LoginService {
   ) {}
 
   //this method registers a user
-  async create(createUserDto: RegistrationDto) {
-    const generatedSalt = this.generateSalt();
-    const hashedPassword = this.hashPassword(
-      createUserDto.password,
-      generatedSalt,
+  async create(createUserDto: RegistrationDto): Promise<userEntity> {
+    const generatedSalt = await bcrypt.genSalt();
+    return this.userModel.create(
+      this.hashPassword(createUserDto.password, generatedSalt).then(
+        (hashedPassword) => {
+          const newUser = new this.userModel({
+            username: createUserDto.username,
+            email: createUserDto.email,
+            password: hashedPassword,
+          });
+          newUser.save();
+          console.log(newUser);
+          return newUser;
+        },
+      ),
     );
-    return this.userModel.create({
-      username: createUserDto.username,
-      email: createUserDto.email,
-      hashedPassword: hashedPassword,
-      salt: generatedSalt,
-    });
   }
 
   //generates a random string to be used as a salt. the salt will be 10 letters long
@@ -38,22 +42,21 @@ export class LoginService {
   }
 
   //this method hashes a password using a salt, it is used when creating an account and logging in
-  hashPassword(password: string, salt: string) {
-    return bcrypt.hash(password, salt);
+  async hashPassword(password: string, salt: string): Promise<string> {
+    return await bcrypt.hash(password, salt);
   }
 
   //this compares 2 passwords, and returns a user if the password was correct
-  async login(loginDTO: LoginDto): Promise<userEntity> {
-    const userFromDb = await this.userModel
-      .findOne({
-        username: loginDTO.username,
-      })
-      .exec();
-    const loginPassword = this.hashPassword(loginDTO.password, userFromDb.salt);
-    if (loginPassword == userFromDb.hashedPassword) {
+  async login(loginDTO: LoginDto) {
+    const userFromDb = await this.getUser(loginDTO);
+    const rightPassword = await bcrypt.compare(
+      loginDTO.password,
+      userFromDb.password,
+    );
+    if (rightPassword == true) {
       return userFromDb;
     } else {
-      throw new Error('Wrong password');
+      throw new Error('The entered password was wrong password');
     }
   }
 

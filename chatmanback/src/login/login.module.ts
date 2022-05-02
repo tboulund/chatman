@@ -5,8 +5,8 @@ import { MongoDbModule } from '../infrastructure/mongoDB/mongoDB.module';
 import { userProvider } from '../infrastructure/mongoDB/userProvider';
 
 @Module({
-  controllers: [LoginController],
   imports: [MongoDbModule],
+  controllers: [LoginController],
   providers: [LoginService, ...userProvider],
 })
 export class LoginModule {}
