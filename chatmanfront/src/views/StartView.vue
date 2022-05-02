@@ -7,7 +7,7 @@
       <div class="center_man">
         <InputText v-model="inputUsername" style="margin-bottom: 10px" placeholder="Enter Username" />
         <InputText type="password" v-model="inputPassword" style="margin-bottom: 10px" placeholder="Enter password" /> <br />
-        <Button @click="handleCreateUser"> Sign in </Button>
+        <Button @click="handleCreateUser" class="p-button-rounded p-button-secondary " > Sign in </Button>
       </div>
     </div>
 
