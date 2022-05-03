@@ -12,6 +12,7 @@ export class UserService {
       username: username,
       password: password,
     });
+    localStorage.setItem('loggedInUser', JSON.stringify(res.data));
     return res.data;
   }
 
@@ -23,6 +24,7 @@ export class UserService {
       username: username,
       password: password
     });
+    localStorage.setItem('loggedInUser', JSON.stringify(res.data));
     return res.data
   }
 }
