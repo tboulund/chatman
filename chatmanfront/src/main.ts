@@ -10,15 +10,11 @@ import InputText from "primevue/inputtext";
 import Toolbar from "primevue/toolbar";
 import SplitButton from "primevue/splitbutton";
 import Listbox from "primevue/listbox";
-import Textarea from "primevue/textarea";
-import BadgeDirective from "primevue/badgedirective";
 
 
 import 'primevue/resources/themes/saga-blue/theme.css'       //theme
 import 'primevue/resources/primevue.min.css'                 //core css
 import 'primeicons/primeicons.css'
-
-
 
 
 const app = createApp(App);
@@ -33,8 +29,6 @@ app.component(`InputText`, InputText);
 app.component(`Toolbar`, Toolbar);
 app.component(`SplitButton`, SplitButton);
 app.component(`Listbox`, Listbox);
-app.component(`Textarea`, Textarea);
-app.directive(`badge`, BadgeDirective);
 
 
 app.mount("#app");

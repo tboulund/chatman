@@ -10,6 +10,8 @@
         <h8 @click="goToCreateUser"> Register Account </h8> <br>
         <Button @click="handleLoginUser" class="p-button-rounded p-button-secondary " > Sign in </Button>
 
+
+
       </div>
     </div>
 
@@ -26,7 +28,7 @@ const userStore = UserStore();
 const inputUsername = ref("");
 const inputPassword = ref("");
 
-function handleLoginUser() {
+function handleCreateUser() {
   userStore.loginUser(inputUsername.value,inputPassword.value);
 }
 function goToCreateUser(){
