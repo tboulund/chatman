@@ -9,14 +9,13 @@ pipeline {
 
     stages{
         stage('building: backend') {
-            when {
-                anyOf {
-                    changeset "chatmanback/**"
-                }
-            }
+
             steps{
                 sh "echo '[BackEnd] is building...'"
-                sh "npm run build"
+                dir("chacmanback"){
+                    sh "npm install"
+                    sh "nest build"
+                }
             }
             post{
                 success{
