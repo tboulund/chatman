@@ -5,44 +5,48 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import { UserStore } from "@/stores/userStore";
 
-
-import { ref } from 'vue';
+import { ref } from "vue";
 
 export default {
   setup() {
     const items = ref([
       {
-        label: 'Create chat',
-        icon: 'pi pi-refresh'
+        label: "Create chat",
+        icon: "pi pi-plus",
+        command: () => {
+          window.location = "CreateView";
+        },
       },
       {
-        label: 'Connect to chat',
-        icon: 'pi pi-times'
-      },
-      {   label: 'Chat Room',
-        icon: 'pi pi-comments',
+        label: "Connect to chat",
+        icon: "pi pi-directions",
         command: () => {
-          window.location.hash = "/fileupload"
-        }
-      }
+          window.location = "ChatView";
+        },
+      },
+      {
+        label: "Chat Room",
+        icon: "pi pi-comments",
+        command: () => {
+          window.location.hash = "/fileupload";
+        },
+      },
     ]);
-
-    return { items }
-  }
-}
-
+    return { items };
+  },
+};
 </script>
 
 <template>
+  <span>
   <div>
     <Toolbar>
       <template #start>
-        <div id="img_reroute">
-          <img src="../src/assets/mini-logov2.png" width="48" height="48"> &nbsp; &nbsp; &nbsp;
-
+        <div id="img_reroute" @click ="$router.push('/')">
+          <img src="../src/assets/mini-logov2.png" width="48" height="48" />
+          &nbsp; &nbsp; &nbsp;
         </div>
         <SplitButton
-          @click="$router.push('Chat')"
           label="CHAT"
           icon="pi pi-comment"
           :model="items"
@@ -51,7 +55,7 @@ export default {
         />
 
         <Button
-          @click="$router.push('/friendsView')"
+          @click="$router.push('/friend')"
           label="FRIENDS"
           icon="pi pi-user-edit"
           class="p-button-rounded p-button-secondary"
@@ -67,10 +71,10 @@ export default {
       </template>
     </Toolbar>
   </div>
+     </span>
   <br />
   <RouterView />
 </template>
-
 
 <style>
 #app {

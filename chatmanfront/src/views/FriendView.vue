@@ -11,15 +11,18 @@ import { ref } from 'vue';
 export default {
   setup() {
     const selectedFriends = ref();([
+
       {name: 'Anna'},
       {name: 'Rasmus'},
     ]);
+
     const items = ref(Array.from({ length: 100000 }, (_, i) => ({ label: `Item #${i}`, value: i })));
 
     return {selectedFriends,name,}
   },
-  name: "FriendView.vue"
 };
+
+
 </script>
 
 <style scoped>
