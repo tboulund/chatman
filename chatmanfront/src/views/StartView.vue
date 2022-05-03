@@ -2,7 +2,7 @@
   <main>
     <div>
       <div class="center_man">
-        <img src="../assets/Chatman_Logov2.png" width="600" height="450">
+        <img src="../assets/Chatman_Logov3.png" width="600" height="450">
       </div>
       <div class="center_man">
         <InputText v-model="inputUsername" style="margin-bottom: 10px" placeholder="Enter Username" />

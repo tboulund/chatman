@@ -38,7 +38,7 @@ export default {
     <Toolbar>
       <template #start>
         <div id="img_reroute">
-          <img src="../src/assets/mini-logo.png">
+          <img src="../src/assets/mini-logov2.png" width="64" height="64"> &nbsp; &nbsp; &nbsp;
 
         </div>
         <SplitButton
