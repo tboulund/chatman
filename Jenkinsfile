@@ -12,7 +12,7 @@ pipeline {
 
             steps{
                 sh "echo '[BackEnd] is building...'"
-                dir("chacmanback"){
+                dir("chatmanback"){
                     sh "npm install"
                     sh "nest build"
                 }
