@@ -14,7 +14,7 @@ export default {
         label: "Create chat",
         icon: "pi pi-plus",
         command: () => {
-          window.location = "CreateView";
+          window.location = "CreateChatView";
         },
       },
       {
