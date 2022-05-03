@@ -11,7 +11,7 @@ pipeline {
         stage('building: backend') {
             when {
                 anyOf {
-                    changeSet "chatmanback/**"
+                    changeset "chatmanback/**"
                 }
             }
             steps{
