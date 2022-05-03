@@ -17,9 +17,8 @@ export class LoginController {
 
   @Post('/register')
   async create(@Body() registerDTO: RegistrationDto) {
-    this.loginService.create(registerDTO).then((bruh) => {
-      console.log('controller' + bruh);
-      return bruh;
+    this.loginService.create(registerDTO).then((newUser) => {
+      return 'user created';
     });
   }
 

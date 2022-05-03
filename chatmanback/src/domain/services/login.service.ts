@@ -12,21 +12,18 @@ export class LoginService {
   ) {}
 
   //this method registers a user
-  async create(createUserDto: RegistrationDto): Promise<userEntity> {
+  async create(createUserDto: RegistrationDto) {
     const generatedSalt = await bcrypt.genSalt();
-    return this.userModel.create(
-      this.hashPassword(createUserDto.password, generatedSalt).then(
-        (hashedPassword) => {
-          const newUser = new this.userModel({
-            username: createUserDto.username,
-            email: createUserDto.email,
-            password: hashedPassword,
-          });
-          newUser.save();
-          console.log(newUser);
-          return newUser;
-        },
-      ),
+
+    this.hashPassword(createUserDto.password, generatedSalt).then(
+      (hashedPassword) => {
+        const newUser = new this.userModel({
+          username: createUserDto.username,
+          email: createUserDto.email,
+          password: hashedPassword,
+        });
+        newUser.save();
+      },
     );
   }
 
