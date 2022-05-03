@@ -6,8 +6,8 @@
       </div>
       <div class="center_man">
         <InputText v-model="inputUsername" style="margin-bottom: 10px" placeholder="Enter Username" />
-        <InputText type="password" v-model="inputPassword" style="margin-bottom: 10px" placeholder="Enter password" /> <br />
-        <h8> Register Account </h8>
+        <InputText type="password" v-model="inputPassword" style="margin-bottom: 10px" placeholder="Enter password" /> <br>
+        <h8 @click="goToCreateUser"> Register Account </h8> <br>
         <Button @click="handleLoginUser" class="p-button-rounded p-button-secondary " > Sign in </Button>
 
       </div>
@@ -20,6 +20,7 @@
 <script setup lang="ts">
 import { UserStore } from "@/stores/userStore";
 import { ref } from "vue";
+import router from "@/router";
 
 const userStore = UserStore();
 const inputUsername = ref("");
@@ -27,6 +28,9 @@ const inputPassword = ref("");
 
 function handleLoginUser() {
   userStore.loginUser(inputUsername.value,inputPassword.value);
+}
+function goToCreateUser(){
+
 }
 
 </script>
