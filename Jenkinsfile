@@ -14,7 +14,7 @@ pipeline {
                 sh "echo '[BackEnd] is building...'"
                 dir("chatmanback"){
                     sh "npm install"
-                    sh "nest build"
+                    sh "npm run build"
                 }
             }
             post{
