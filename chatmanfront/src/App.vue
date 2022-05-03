@@ -5,59 +5,64 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import { UserStore } from "@/stores/userStore";
 
-
-import { ref } from 'vue';
+import { ref } from "vue";
 
 export default {
   setup() {
     const items = ref([
       {
-        label: 'Create chat',
-        icon: 'pi pi-refresh'
+        label: "Create chat",
+        icon: "pi pi-plus",
+        command:() => {
+          window.location ="CreateView";
+        },
       },
       {
-        label: 'Connect to chat',
-        icon: 'pi pi-times'
+        label: "Connect to chat",
+        icon: "pi pi-directions",
+        command:() => {
+          window.location ="ChatView";
+        },
       },
-      {   label: 'Chat Room',
-        icon: 'pi pi-comments',
+      {
+        label: "Chat Room",
+        icon: "pi pi-comments",
         command: () => {
-          window.location.hash = "/fileupload"
-        }
-      }
+          window.location.hash = "/fileupload";
+        },
+      },
     ]);
-
-    return { items }
-  }
-}
-
+    return { items };
+  },
+};
 </script>
 
 <template>
+  <span>
   <div>
     <Toolbar>
       <template #start>
-        <div id="img_reroute">
-          <img src="../src/assets/mini-logo.png">
-
+        <div id="img_reroute" @click="$router.push('/')">
+          <img src="../src/assets/mini-logo.png" />
         </div>
-        <SplitButton
-          @click="$router.push('Chat')"
-          label="CHAT"
-          icon="pi pi-comment"
-          :model="items"
-          class="p-button-rounded p-button-raised p-button-secondary"
-          style="margin-right: 15px"
-        />
 
-        <Button
-          @click="$router.push('/friendsView')"
-          label="FRIENDS"
-          icon="pi pi-user-edit"
-          class="p-button-rounded p-button-secondary"
-          style="margin-right: 15px"
-        />
+          <SplitButton
+            label="CHAT"
+            icon="pi pi-comment"
+            :model="items"
+            class="p-button-rounded p-button-raised p-button-secondary"
+            style="margin-right: 15px"
+          />
+
+          <Button
+            @click="$router.push('/friend')"
+            label="FRIENDS"
+            icon="pi pi-user"
+            class="p-button-rounded p-button-secondary"
+            style="margin-right: 15px"
+          />
       </template>
+
       <template #end>
         <Button
           @click="logOut"
@@ -67,10 +72,10 @@ export default {
       </template>
     </Toolbar>
   </div>
+  </span>
   <br />
   <RouterView />
 </template>
-
 
 <style>
 #app {
