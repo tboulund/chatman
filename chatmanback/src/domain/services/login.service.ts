@@ -13,8 +13,17 @@ export class LoginService {
 
   //this method registers a user
   async create(createUserDto: RegistrationDto) {
+    this.userModel.find().then((allUsers) => {
+      allUsers.forEach(function (user) {
+        if (
+          user.email == createUserDto.email ||
+          user.username == createUserDto.username
+        ) {
+          throw new Error('email or username already in use');
+        }
+      });
+    });
     const generatedSalt = await bcrypt.genSalt();
-
     this.hashPassword(createUserDto.password, generatedSalt).then(
       (hashedPassword) => {
         const newUser = new this.userModel({

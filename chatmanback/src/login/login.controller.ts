@@ -10,6 +10,7 @@ import {
 import { LoginService } from '../domain/services/login.service';
 import { LoginDto } from './dto/login.dto';
 import { RegistrationDto } from './dto/registration.dto';
+import { UserAndTokenDTO } from './dto/userAndTokenDTO';
 
 @Controller('login')
 export class LoginController {
@@ -23,7 +24,11 @@ export class LoginController {
   }
 
   @Post()
-  login(@Body() loginDTO: LoginDto) {
-    return this.loginService.login(loginDTO);
+  async login(@Body() loginDTO: LoginDto): Promise<UserAndTokenDTO> {
+    const user = await this.loginService.login(loginDTO);
+    const uatdto = new UserAndTokenDTO();
+    uatdto.loginUser = user;
+    uatdto.token = 'temp';
+    return uatdto;
   }
 }
