@@ -9,7 +9,7 @@
         <InputText type="password" v-model="inputPassword" style="margin-bottom: 10px" placeholder="Enter Password" /> <br>
         <Button @click="handleLoginUser" class="p-button-rounded p-button-secondary " > Sign in </Button>
         &nbsp;
-        <Button @click="$router.push('/CreateUserView')"> Create Account </Button> <br>
+        <Button @click="$router.push('/createuser')"> Create Account </Button> <br>
       </div>
     </div>
 
