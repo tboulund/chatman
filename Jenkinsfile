@@ -38,7 +38,11 @@ pipeline {
             }
         }
         stage('building: frontend') {
-
+            when{
+                anyOf{
+                    changeset "chatmanfront/**"
+                }
+            }
             steps{
                 sh"echo '[Frontend] is building...'"
                 dir("chatmanfront"){
