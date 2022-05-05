@@ -6,10 +6,9 @@
       </div>
       <div class="center_man">
         <InputText v-model="inputUsername" style="margin-bottom: 10px" placeholder="Enter Username" />
-        <InputText type="password" v-model="inputPassword" style="margin-bottom: 10px" placeholder="Enter Password" /> <br>
+        <InputText type="password" v-model="inputPassword" style="margin-bottom: 10px" placeholder="Enter Password" />
+        <sub @click="$router.push('/createUser')">Create Account</sub> <br>
         <Button @click="handleLoginUser" class="p-button-rounded p-button-secondary " > Sign in </Button>
-        &nbsp;
-        <Button @click="$router.push('/createuser')"> Create Account </Button> <br>
       </div>
     </div>
 

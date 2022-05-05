@@ -28,7 +28,7 @@ export default {
         label: "Chat Room",
         icon: "pi pi-comments",
         command: () => {
-          window.location.hash = "/fileupload";
+          window.location ="ChatRoomView";
         },
       },
     ]);
@@ -39,39 +39,39 @@ export default {
 
 <template>
   <span>
-  <div>
-    <Toolbar>
-      <template #start>
-        <div id="img_reroute" @click ="$router.push('/')">
-          <img src="../src/assets/mini-logov2.png" width="48" height="48" />
-          &nbsp; &nbsp; &nbsp;
-        </div>
-        <SplitButton
-          label="CHAT"
-          icon="pi pi-comment"
-          :model="items"
-          class="p-button-rounded p-button-raised p-button-secondary"
-          style="margin-right: 15px"
-        />
+    <div>
+      <Toolbar>
+        <template #start>
+          <div id="img_reroute" @click="$router.push('/')">
+            <img src="../src/assets/mini-logov2.png" width="48" height="48" />
+            &nbsp; &nbsp; &nbsp;
+          </div>
+          <SplitButton
+            label="CHAT"
+            icon="pi pi-comment"
+            :model="items"
+            class="p-button-rounded p-button-raised p-button-secondary"
+            style="margin-right: 15px"
+          />
 
-        <Button
-          @click="$router.push('/friend')"
-          label="FRIENDS"
-          icon="pi pi-user-edit"
-          class="p-button-rounded p-button-secondary"
-          style="margin-right: 15px"
-        />
-      </template>
-      <template #end>
-        <Button
-          @click="logOut"
-          icon="pi pi-times"
-          class="p-button-secondary p-button-rounded"
-        />
-      </template>
-    </Toolbar>
-  </div>
-     </span>
+          <Button
+            @click="$router.push('/friend')"
+            label="FRIENDS"
+            icon="pi pi-user-edit"
+            class="p-button-rounded p-button-secondary"
+            style="margin-right: 15px"
+          />
+        </template>
+        <template #end>
+          <Button
+            @click="logOut"
+            icon="pi pi-times"
+            class="p-button-secondary p-button-rounded"
+          />
+        </template>
+      </Toolbar>
+    </div>
+  </span>
   <br />
   <RouterView />
 </template>
