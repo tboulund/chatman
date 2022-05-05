@@ -29,20 +29,16 @@ pipeline {
         }
         stage('backend tests') {
             steps{
-                sh"echo'TBD'"
+                sh"echo 'TBD'"
             }
             post {
                 success{
-                    sh"echo'tests are done. coverage report TBD'"
+                    sh"echo 'tests are done. coverage report TBD'"
                 }
             }
         }
         stage('building: frontend') {
-            when {
-                anyOf {
-                    changeset "chatmanfront/**"
-                }
-            }
+            
             steps{
                 sh"echo'[Frontend] is building...'"
                 dir("chatmanfront"){
