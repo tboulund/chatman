@@ -28,8 +28,7 @@ export class LoginController {
       return 'user created';
     });
   }
-<<<<<<< Updated upstream
-
+  
   @Post()
   async login(@Body() loginDTO: LoginDto): Promise<UserAndTokenDTO> {
     const user = await this.loginService.login(loginDTO);
@@ -37,7 +36,7 @@ export class LoginController {
     uatdto.loginUser = user;
     uatdto.token = 'temp';
     return uatdto;
-=======
+
   /*
   @Post('/login')
   login(@Body() loginDTO: LoginDto) {
@@ -49,6 +48,5 @@ export class LoginController {
   @Post('login')
   async login(@Body() loginDTO: LoginDto) {
     return this.loginService.validateUser(loginDTO);
->>>>>>> Stashed changes
   }
 }
