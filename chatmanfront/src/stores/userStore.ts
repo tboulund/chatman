@@ -7,12 +7,16 @@ const userService: UserService = new UserService();
 export const UserStore = defineStore({
   id: "userStore",
   state: () => ({
-    loggedInUser: { name: "" } as User,
+    loggedInUser: undefined as User | undefined,
   }),
   getters: {
     userName: (state) => {
-      if (state.loggedInUser.name != undefined) return state.loggedInUser.name;
-      else return "";
+
+      if (state.loggedInUser) return state.loggedInUser.name;
+      return "";
+    },
+    isLoggedIn: (state) => {
+      return state.loggedInUser != undefined;
     },
   },
   actions: {
@@ -22,11 +26,23 @@ export const UserStore = defineStore({
         .then((user) => {this.loggedInUser = user})
         .catch((err) => console.log(err));
     },
+    logOut(){
+      this.loggedInUser = undefined;
+    },
     loginUser(username: string, password: string) {
+      this.loggedInUser = {
+        username: username,
+        password: password,
+        uuid: '5f144613-fc1b-4ee0-98e7-a171b7c94b2d',
+        name: 'thyr'
+
+      };
+      /*
       userService
         .loginUser(username,password)
         .then((user) => {this.loggedInUser = user})
         .catch((err) => console.log(err))
+       */
     }
   },
 });

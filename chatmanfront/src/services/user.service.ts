@@ -20,7 +20,7 @@ export class UserService {
     username: string,
     password: string
   ): Promise<User> {
-    const res = await http.post<User>("/users", {
+    const res = await http.post<User>("auth/login", {
       username: username,
       password: password
     });
