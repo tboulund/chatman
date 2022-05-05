@@ -38,9 +38,9 @@ pipeline {
             }
         }
         stage('building: frontend') {
-            
+
             steps{
-                sh"echo'[Frontend] is building...'"
+                sh"echo '[Frontend] is building...'"
                 dir("chatmanfront"){
                     sh"npm install"
                     sh"npm build"
