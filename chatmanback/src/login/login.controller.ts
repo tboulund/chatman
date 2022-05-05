@@ -6,13 +6,19 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { LoginService } from '../domain/services/login.service';
 import { LoginDto } from './dto/login.dto';
 import { RegistrationDto } from './dto/registration.dto';
+<<<<<<< Updated upstream
 import { UserAndTokenDTO } from './dto/userAndTokenDTO';
+=======
+import { request } from 'https';
+import { LocalAuthGuard } from './local-auth.guard';
+>>>>>>> Stashed changes
 
-@Controller('login')
+@Controller('auth')
 export class LoginController {
   constructor(private readonly loginService: LoginService) {}
 
@@ -22,6 +28,7 @@ export class LoginController {
       return 'user created';
     });
   }
+<<<<<<< Updated upstream
 
   @Post()
   async login(@Body() loginDTO: LoginDto): Promise<UserAndTokenDTO> {
@@ -30,5 +37,18 @@ export class LoginController {
     uatdto.loginUser = user;
     uatdto.token = 'temp';
     return uatdto;
+=======
+  /*
+  @Post('/login')
+  login(@Body() loginDTO: LoginDto) {
+    return this.loginService.validateUser(loginDTO);
+  }
+  */
+
+  @UseGuards(LocalAuthGuard)
+  @Post('login')
+  async login(@Body() loginDTO: LoginDto) {
+    return this.loginService.validateUser(loginDTO);
+>>>>>>> Stashed changes
   }
 }
