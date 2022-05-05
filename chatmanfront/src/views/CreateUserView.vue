@@ -15,6 +15,7 @@ import router from "@/router";
 const userStore = UserStore();
 const inputUsername = ref("");
 const inputPassword = ref("");
+const inputEmail = ref("");
 
 </script>
 <style>
