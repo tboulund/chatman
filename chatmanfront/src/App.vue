@@ -47,6 +47,7 @@ export default {
             &nbsp; &nbsp; &nbsp;
           </div>
           <SplitButton
+              @click="$router.push('/chat')"
             label="CHAT"
             icon="pi pi-comment"
             :model="items"
