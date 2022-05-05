@@ -43,7 +43,7 @@ pipeline {
                 sh"echo '[Frontend] is building...'"
                 dir("chatmanfront"){
                     sh"npm install"
-                    sh"npm run build"
+                    sh"vite build"
                 }
             }
 
