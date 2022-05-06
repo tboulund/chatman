@@ -40,7 +40,6 @@ export class LoginController {
     }
     */
 
-  @UseGuards(LocalAuthGuard)
   @Post('login')
   async login(@Body() loginDTO: LoginDto) {
     return this.loginService.validateUser(loginDTO);
