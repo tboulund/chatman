@@ -29,14 +29,14 @@ export default {
         label: "Connect to chat",
         icon: "pi pi-directions",
         command: () => {
-          window.location = "ChatView";
+          window.location = "ConnectChatView";
         },
       },
       {
         label: "Chat Room",
         icon: "pi pi-comments",
         command: () => {
-          window.location = "ChatRoomView";
+          window.location = "/chat";
         },
       },
     ]);
@@ -46,14 +46,13 @@ export default {
 </script>
 
 <template>
-  <Toolbar style="margin: 5px 15px" v-if="showToolBar">
+  <Toolbar style="margin: 5px 15px" v-if="true">
     <template #start>
       <div id="img_reroute" @click="$router.push('/')">
         <img src="../src/assets/mini-logov2.png" width="46" height="46" />
         &nbsp; &nbsp; &nbsp;
       </div>
       <SplitButton
-        @click="$router.push('/chat')"
         label="CHAT"
         icon="pi pi-comment"
         :model="items"
