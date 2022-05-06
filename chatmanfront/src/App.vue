@@ -22,21 +22,21 @@ export default {
         label: "Create chat",
         icon: "pi pi-plus",
         command: () => {
-          window.location = "CreateChatView";
+          window.location.href = "CreateChatView";
         },
       },
       {
         label: "Connect to chat",
         icon: "pi pi-directions",
         command: () => {
-          window.location = "ConnectChatView";
+          window.location.href = "ConnectChatView";
         },
       },
       {
         label: "Chat Room",
         icon: "pi pi-comments",
         command: () => {
-          window.location = "/chat";
+          window.location.href = "/chat";
         },
       },
     ]);
