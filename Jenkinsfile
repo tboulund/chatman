@@ -19,6 +19,7 @@ pipeline {
                 dir("chatmanback"){
                     sh "npm install"
                     sh "npm run build"
+                    sh "docker-compose --env-file ../config/Test.env build api"
                 }
             }
             post{
@@ -29,7 +30,7 @@ pipeline {
         }
         stage('backend tests') {
             steps{
-                sh"echo 'TBD'"
+                sh"echo 'TBD: this should run all tests in the (domain.test) folder'"
             }
             post {
                 success{
@@ -38,19 +39,30 @@ pipeline {
             }
         }
         stage('building: frontend') {
-            when{
-                anyOf{
-                    changeset "chatmanfront/**"
-                }
-            }
+
             steps{
                 sh"echo '[Frontend] is building...'"
                 dir("chatmanfront"){
                     sh"npm install"
                     sh"npm run build"
+                    sh"docker-compose --env-file ../config/Test.env build web"
                 }
             }
-
+        }
+        stage('reset containers') {
+            steps{
+                script{
+                    try{
+                        sh "docker-compose --env-file ./config/Test.env down"
+                    }
+                    finally {}
+                }
+            }
+        }
+        stage('deployment') {
+            steps{
+                sh "docker-compose up --env-file ./config/Test.env -d"
+            }
         }
 
     }
