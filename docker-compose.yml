@@ -3,7 +3,7 @@
 services:
   web:
     build:
-      context: "ChatmanFront"
+      context: "chatmanfront"
     image: "localhost:7002/chatman_web:${IMAGE_TAG}"
     container_name: "${WEB_CONT_NAME}"
     ports:
@@ -11,7 +11,7 @@ services:
 
   api:
     build:
-      context: "ChatmanBack"
+      context: "chatmanback"
     image: "localhost:7002/chatman_api:${IMAGE_TAG}"
     container_name: "${API_CONT_NAME}"
     ports:
