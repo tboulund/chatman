@@ -19,8 +19,8 @@ pipeline {
                 dir("chatmanback"){
                     sh "npm install"
                     sh "npm run build"
-                    sh "docker-compose --env-file ../config/Test.env build api"
                 }
+                sh "docker-compose --env-file config/Test.env build api"
             }
             post{
                 success{
@@ -45,8 +45,8 @@ pipeline {
                 dir("chatmanfront"){
                     sh"npm install"
                     sh"npm run build"
-                    sh"docker-compose --env-file ../config/Test.env build web"
                 }
+                sh "docker-compose --env-file config/Test.env build web"
             }
         }
         stage('reset containers') {
